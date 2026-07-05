@@ -3,584 +3,501 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RECRAFT — Операционная трансформация бизнеса</title>
-<meta name="description" content="RECRAFT — консалтинговая компания по операционной трансформации. Внедрение CRM/ERP, AI-автоматизация, антикризисный менеджмент.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<meta name="description" content="RECRAFT — финансовый контроль и цифровой порядок для строительных, горнодобывающих, телеком- и транспортных компаний Казахстана. Управленческая отчётность, закупки, учётные системы, AI.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="website">
+<meta property="og:title" content="RECRAFT — финансовый контроль и цифровой порядок">
+<meta property="og:description" content="Маржа теряется не в отчётах — на площадке. Управленческая отчётность для акционера, пересборка закупок, учётные системы и AI-слой поверх вашей 1С.">
+<meta property="og:locale" content="ru_RU">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230C1522'/%3E%3Cpath d='M6 30 C16 20 20 20 26 28 C33 38 36 46 44 40 C52 34 55 24 60 16' fill='none' stroke='%23C9A34E' stroke-width='4' stroke-linecap='round'/%3E%3Ccircle cx='36' cy='43' r='4' fill='%23D9805A'/%3E%3C/svg%3E">
+<title>RECRAFT — финансовый контроль и цифровой порядок</title>
 <style>
-/* ===== RESET & BASE ===== */
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#0C0C0E;--card:#141418;--text:#F1EFE8;--text-dim:#9A9A9E;
-  --plan:#5DCAA5;--do:#85B7EB;--check:#EF9F27;--act:#F0997B;
-  --font:'DM Sans',sans-serif;--mono:'Space Mono',monospace;
+  --bg:#F4F0E5; --surface:#FBF8F0; --ink:#1A2B45; --dim:#5C6B82;
+  --gold:#8A6D1E; --gold-line:#B99A45; --terra:#BC5B32; --terra-ink:#FFF6EE;
+  --hair:rgba(26,43,69,.16); --hair-strong:rgba(26,43,69,.32);
+  --curve:#9C7B22; --curve-zero:rgba(26,43,69,.35);
+  --display:Georgia,'Times New Roman',serif;
+  --body:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+  --mono:ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0C1522; --surface:#13213599; --ink:#EAE6DA; --dim:#8B96A8;
+    --gold:#C9A34E; --gold-line:#C9A34E; --terra:#D9805A; --terra-ink:#160D07;
+    --hair:rgba(234,230,218,.14); --hair-strong:rgba(234,230,218,.3);
+    --curve:#C9A34E; --curve-zero:rgba(234,230,218,.3);
+  }
+}
+:root[data-theme="light"]{
+  --bg:#F4F0E5; --surface:#FBF8F0; --ink:#1A2B45; --dim:#5C6B82;
+  --gold:#8A6D1E; --gold-line:#B99A45; --terra:#BC5B32; --terra-ink:#FFF6EE;
+  --hair:rgba(26,43,69,.16); --hair-strong:rgba(26,43,69,.32);
+  --curve:#9C7B22; --curve-zero:rgba(26,43,69,.35);
+}
+:root[data-theme="dark"]{
+  --bg:#0C1522; --surface:#13213599; --ink:#EAE6DA; --dim:#8B96A8;
+  --gold:#C9A34E; --gold-line:#C9A34E; --terra:#D9805A; --terra-ink:#160D07;
+  --hair:rgba(234,230,218,.14); --hair-strong:rgba(234,230,218,.3);
+  --curve:#C9A34E; --curve-zero:rgba(234,230,218,.3);
 }
 html{scroll-behavior:smooth}
 body{
-  font-family:var(--font);color:var(--text);background:var(--bg);
-  line-height:1.6;overflow-x:hidden;
+  background:var(--bg); color:var(--ink); font-family:var(--body);
+  line-height:1.65; margin:0; -webkit-font-smoothing:antialiased;
 }
-a{color:inherit;text-decoration:none}
-img{max-width:100%}
+.wrap{max-width:1060px; margin:0 auto; padding:0 24px}
+a{color:inherit}
+::selection{background:var(--gold-line); color:#10131a}
 
-/* ===== GRAIN OVERLAY ===== */
-body::after{
-  content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
-  opacity:.04;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size:128px 128px;
+.eyebrow{
+  font-family:var(--mono); font-size:.72rem; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--gold); display:flex; align-items:center; gap:12px;
 }
+.eyebrow::after{content:''; height:1px; flex:0 0 44px; background:var(--gold-line); opacity:.6}
+h1,h2,h3{font-family:var(--display); font-weight:700; line-height:1.12; text-wrap:balance; margin:0}
+h2{font-size:clamp(1.7rem,3.6vw,2.4rem)}
+p{margin:0}
+.lead{color:var(--dim); font-size:1.08rem; max-width:38em}
 
-/* ===== CONTAINER ===== */
-.container{max-width:1140px;margin:0 auto;padding:0 24px}
-
-/* ===== BUTTONS ===== */
 .btn{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:14px 28px;border-radius:10px;font-weight:600;font-size:1rem;
-  font-family:var(--font);border:none;cursor:pointer;transition:all .3s;
+  display:inline-flex; align-items:center; gap:10px; padding:15px 30px;
+  font-family:var(--body); font-weight:600; font-size:1rem; text-decoration:none;
+  background:var(--terra); color:var(--terra-ink); border:none; cursor:pointer;
+  transition:transform .2s ease, filter .2s ease;
 }
-.btn-primary{
-  background:linear-gradient(135deg,var(--plan),var(--do));color:var(--bg);
-}
-.btn-primary:hover{filter:brightness(1.15);transform:translateY(-2px)}
-.btn-secondary{
-  background:transparent;color:var(--text);
-  border:1px solid rgba(241,239,232,.2);
-}
-.btn-secondary:hover{border-color:var(--plan);color:var(--plan)}
+.btn:hover{transform:translateY(-2px); filter:brightness(1.06)}
+.btn:focus-visible{outline:3px solid var(--gold-line); outline-offset:3px}
+.btn.ghost{background:transparent; color:var(--ink); box-shadow:inset 0 0 0 1px var(--hair-strong)}
+.btn.ghost:hover{box-shadow:inset 0 0 0 1px var(--gold-line); color:var(--gold)}
 
-/* ===== SECTION TITLES ===== */
-.section-title{
-  font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;
-  margin-bottom:16px;
+/* ---------- STICKY TOPBAR ---------- */
+.topbar{
+  position:fixed; top:0; left:0; right:0; z-index:50;
+  transform:translateY(-100%); transition:transform .35s ease;
+  background:var(--bg);
+  background:color-mix(in srgb, var(--bg) 93%, transparent);
+  -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--hair);
 }
-.section-sub{color:var(--text-dim);font-size:1.05rem;max-width:560px}
-.section-header{text-align:center;margin-bottom:56px}
-.section-header .section-sub{margin:0 auto}
+.topbar.on{transform:none}
+.topbar .wrap{display:flex; align-items:center; justify-content:space-between; padding-top:10px; padding-bottom:10px}
+.topbar .wordmark{font-size:.85rem}
+.topbar .btn{padding:9px 18px; font-size:.88rem}
+section[id],#contact{scroll-margin-top:76px}
 
-/* ===== SCROLL REVEAL ===== */
-.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
+/* ---------- HERO ---------- */
+header.hero{padding:48px 0 0; border-bottom:1px solid var(--hair)}
+.brandbar{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:56px}
+.wordmark{font-family:var(--mono); font-weight:700; font-size:1.05rem; letter-spacing:.34em}
+.wordmark b{color:var(--gold)}
+.brand-city{font-family:var(--mono); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--dim)}
+.hero h1{font-size:clamp(2.3rem,5.6vw,3.9rem); max-width:15.5em; margin:22px 0 26px}
+.hero h1 em{font-style:italic; color:var(--gold)}
+.hero .lead{margin-bottom:36px}
+.hero-cta{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:26px}
 
-/* ============================================================
-   HERO
-   ============================================================ */
-.hero{
-  position:relative;min-height:100vh;display:flex;align-items:center;
-  justify-content:center;text-align:center;padding:120px 24px 80px;
-  overflow:hidden;
-}
-/* Grid background */
-.hero::before{
-  content:'';position:absolute;inset:0;
-  background-image:
-    linear-gradient(rgba(241,239,232,.04) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(241,239,232,.04) 1px,transparent 1px);
-  background-size:64px 64px;
-  mask-image:radial-gradient(ellipse 60% 50% at 50% 40%,black 20%,transparent 70%);
-  -webkit-mask-image:radial-gradient(ellipse 60% 50% at 50% 40%,black 20%,transparent 70%);
-}
-/* Glow orbs */
-.hero-glow{
-  position:absolute;width:600px;height:600px;border-radius:50%;
-  filter:blur(140px);opacity:.10;pointer-events:none;
-}
-.hero-glow--teal{background:var(--plan);top:-200px;left:-100px}
-.hero-glow--blue{background:var(--do);bottom:-200px;right:-100px}
-
-.hero-content{position:relative;z-index:1;max-width:780px}
-.hero-logo{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:40px}
-.hero-logo-text{font-size:1.6rem;font-weight:700;letter-spacing:4px}
-
-.hero h1{
-  font-size:clamp(2.2rem,5.5vw,3.6rem);font-weight:700;
-  line-height:1.15;margin-bottom:24px;
-}
-.hero h1 .gradient{
-  background:linear-gradient(135deg,var(--plan),var(--do));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-.hero p{
-  font-size:clamp(1rem,1.8vw,1.2rem);color:var(--text-dim);
-  max-width:620px;margin:0 auto 40px;
-}
-.hero-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
-
-/* ============================================================
-   METRICS
-   ============================================================ */
-.metrics{padding:0 24px;margin-top:-40px;position:relative;z-index:2}
-.metrics-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
-  background:rgba(241,239,232,.06);border-radius:16px;overflow:hidden;
-}
-.metric{
-  background:var(--card);padding:36px 24px;text-align:center;
-}
-.metric-value{
-  font-family:var(--mono);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;
-  margin-bottom:6px;
-}
-.metric-label{color:var(--text-dim);font-size:.9rem}
-.metric:nth-child(1) .metric-value{color:var(--plan)}
-.metric:nth-child(2) .metric-value{color:var(--do)}
-.metric:nth-child(3) .metric-value{color:var(--check)}
-.metric:nth-child(4) .metric-value{color:var(--act)}
-
-/* ============================================================
-   SERVICES
-   ============================================================ */
-.services{padding:120px 24px}
-.services-grid{
-  display:grid;grid-template-columns:repeat(2,1fr);gap:20px;
-  max-width:1140px;margin:0 auto;
-}
-.service-card{
-  background:var(--card);border-radius:16px;padding:40px 32px;
-  border:1px solid rgba(241,239,232,.06);
-  transition:border-color .3s,transform .3s;
-}
-.service-card:hover{transform:translateY(-4px)}
-.service-card:nth-child(1):hover{border-color:var(--plan)}
-.service-card:nth-child(2):hover{border-color:var(--do)}
-.service-card:nth-child(3):hover{border-color:var(--check)}
-.service-card:nth-child(4):hover{border-color:var(--act)}
-
-.service-tag{
-  font-family:var(--mono);font-size:.8rem;font-weight:700;
-  letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;
-}
-.service-card:nth-child(1) .service-tag{color:var(--plan)}
-.service-card:nth-child(2) .service-tag{color:var(--do)}
-.service-card:nth-child(3) .service-tag{color:var(--check)}
-.service-card:nth-child(4) .service-tag{color:var(--act)}
-
-.service-card h3{font-size:1.3rem;margin-bottom:16px}
-.service-card ul{list-style:none;display:flex;flex-direction:column;gap:8px}
-.service-card li{
-  color:var(--text-dim);font-size:.95rem;
-  padding-left:20px;position:relative;
-}
-.service-card li::before{
-  content:'→';position:absolute;left:0;color:var(--text-dim);
+.curveband{position:relative; margin-top:8px}
+.curveband svg{display:block; width:100%; height:auto}
+.curve-label{font-family:var(--mono); font-size:13px; letter-spacing:.08em}
+.lbl-short{display:none}
+@media(max-width:760px){
+  .curve-label{font-size:26px}
+  .lbl-long{display:none}
+  .lbl-short{display:block}
 }
 
-/* ============================================================
-   APPROACH
-   ============================================================ */
-.approach{padding:120px 24px}
-.approach-steps{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
-  max-width:1140px;margin:0 auto;position:relative;
-}
-/* Gradient line connecting steps */
-.approach-steps::before{
-  content:'';position:absolute;top:24px;left:calc(12.5% + 12px);
-  right:calc(12.5% + 12px);height:2px;
-  background:linear-gradient(90deg,var(--plan),var(--do),var(--check),var(--act));
-  border-radius:2px;
-}
-.step{text-align:center;padding:0 16px;position:relative}
-.step-dot{
-  width:14px;height:14px;border-radius:50%;margin:17px auto 24px;
-  position:relative;z-index:1;
-}
-.step:nth-child(1) .step-dot{background:var(--plan)}
-.step:nth-child(2) .step-dot{background:var(--do)}
-.step:nth-child(3) .step-dot{background:var(--check)}
-.step:nth-child(4) .step-dot{background:var(--act)}
+/* staged entrance */
+.rise{opacity:0; transform:translateY(26px); animation:rise .8s cubic-bezier(.2,.6,.2,1) forwards}
+.rise.d1{animation-delay:.08s}.rise.d2{animation-delay:.2s}.rise.d3{animation-delay:.34s}.rise.d4{animation-delay:.48s}
+@keyframes rise{to{opacity:1; transform:none}}
+#cashcurve .draw{stroke-dasharray:1600; stroke-dashoffset:1600; animation:draw 1.9s .55s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+#cashcurve .pop{opacity:0; animation:pop .5s 2.1s ease forwards}
+@keyframes pop{to{opacity:1}}
 
-.step-num{
-  font-family:var(--mono);font-size:.8rem;color:var(--text-dim);
-  margin-bottom:8px;
-}
-.step h3{font-size:1.1rem;margin-bottom:4px}
-.step .step-time{
-  font-family:var(--mono);font-size:.8rem;color:var(--text-dim);
-  margin-bottom:10px;
-}
-.step p{font-size:.9rem;color:var(--text-dim)}
-
-/* ============================================================
-   CASES
-   ============================================================ */
-.cases{padding:120px 24px}
-.cases-grid{
-  display:grid;grid-template-columns:repeat(2,1fr);gap:20px;
-  max-width:1140px;margin:0 auto;
-}
-.case-card{
-  background:var(--card);border-radius:16px;padding:36px 32px;
-  border:1px solid rgba(241,239,232,.06);
-  transition:border-color .3s;
-}
-.case-card:hover{border-color:rgba(241,239,232,.15)}
-.case-tag{
-  font-family:var(--mono);font-size:.75rem;font-weight:700;
-  letter-spacing:1px;text-transform:uppercase;color:var(--plan);
-  margin-bottom:12px;
-}
-.case-card h3{font-size:1.15rem;margin-bottom:12px}
-.case-card p{font-size:.93rem;color:var(--text-dim);margin-bottom:16px}
-.case-metrics{display:flex;gap:16px;flex-wrap:wrap}
-.case-metric{
-  font-family:var(--mono);font-size:.8rem;
-  padding:6px 14px;border-radius:8px;
-  background:rgba(241,239,232,.05);color:var(--text);
+/* ---------- FACT STRIP ---------- */
+.facts{border-bottom:1px solid var(--hair)}
+.facts .wrap{display:grid; grid-template-columns:repeat(4,1fr); gap:0}
+.fact{padding:30px 22px 32px; border-left:1px solid var(--hair)}
+.fact:first-child{border-left:none; padding-left:0}
+.fact b{display:block; font-family:var(--display); font-size:1.9rem; font-variant-numeric:tabular-nums; color:var(--gold); margin-bottom:4px}
+.fact span{font-size:.86rem; color:var(--dim); line-height:1.45; display:block}
+@media(max-width:760px){
+  .facts .wrap{grid-template-columns:1fr 1fr; gap:0 28px}
+  .fact{border-left:none; padding:22px 0; border-top:1px solid var(--hair)}
+  .fact:nth-child(-n+2){border-top:none}
 }
 
-/* ============================================================
-   TECH STACK
-   ============================================================ */
-.stack{padding:80px 24px}
-.stack-pills{
-  display:flex;flex-wrap:wrap;gap:10px;justify-content:center;
-  max-width:900px;margin:0 auto;
-}
-.pill{
-  font-family:var(--mono);font-size:.82rem;
-  padding:10px 20px;border-radius:100px;
-  background:var(--card);border:1px solid rgba(241,239,232,.08);
-  color:var(--text-dim);transition:all .3s;
-}
-.pill:hover{border-color:var(--plan);color:var(--plan)}
+/* ---------- SECTIONS ---------- */
+section{padding:88px 0 0}
+.sect-head{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.6fr); gap:24px 64px; margin-bottom:52px}
+.sect-head .lead{margin-top:14px}
+@media(max-width:760px){.sect-head{grid-template-columns:1fr}}
 
-/* ============================================================
-   CTA
-   ============================================================ */
-.cta{
-  padding:120px 24px;text-align:center;position:relative;overflow:hidden;
-}
-.cta-glow{
-  position:absolute;width:500px;height:500px;border-radius:50%;
-  filter:blur(160px);opacity:.08;pointer-events:none;
-  top:50%;left:50%;transform:translate(-50%,-50%);
-  background:linear-gradient(135deg,var(--plan),var(--do));
-}
-.cta-content{position:relative;z-index:1}
-.cta h2{
-  font-size:clamp(2rem,4vw,2.8rem);font-weight:700;margin-bottom:16px;
-}
-.cta p{color:var(--text-dim);font-size:1.1rem;margin-bottom:40px}
-.cta .btn{margin-bottom:48px}
+/* pains */
+.pains{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--hair)}
+.pain{background:var(--bg); padding:28px 32px 30px}
+.pain:nth-child(odd){padding-left:0}
+.pain blockquote{margin:0 0 12px; font-family:var(--display); font-style:italic; font-size:1.22rem; line-height:1.35; text-wrap:balance}
+.pain blockquote::before{content:'« '; color:var(--gold)}
+.pain blockquote::after{content:' »'; color:var(--gold)}
+.pain p{color:var(--dim); font-size:.95rem; max-width:34em}
+.pain p b{color:var(--ink); font-weight:600}
+@media(max-width:760px){.pains{grid-template-columns:1fr}.pain{padding-left:0;padding-right:0}}
 
-.contacts{
-  display:flex;gap:32px;justify-content:center;flex-wrap:wrap;
-  color:var(--text-dim);font-size:.95rem;
+/* cases — ledger rows */
+.case{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.9fr); gap:18px 64px; padding:40px 0 44px; border-top:1px solid var(--hair)}
+.case:last-of-type{border-bottom:1px solid var(--hair)}
+.case-meta{display:flex; flex-direction:column; gap:10px}
+.case-industry{font-family:var(--mono); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--gold)}
+.case-scale{color:var(--dim); font-size:.92rem; line-height:1.5}
+.case h3{font-size:1.45rem; margin-bottom:14px}
+.case-body{color:var(--dim); max-width:42em}
+.case-body b{color:var(--ink); font-weight:600}
+.case-tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:20px}
+.tag{
+  font-family:var(--mono); font-size:.7rem; letter-spacing:.08em; text-transform:uppercase;
+  padding:6px 12px; box-shadow:inset 0 0 0 1px var(--hair-strong); color:var(--dim);
 }
-.contacts a{transition:color .3s}
-.contacts a:hover{color:var(--plan)}
-.contacts span{display:flex;align-items:center;gap:6px}
+.tag.live{color:var(--gold); box-shadow:inset 0 0 0 1px var(--gold-line)}
+@media(max-width:760px){.case{grid-template-columns:1fr}}
 
-/* ============================================================
-   FOOTER
-   ============================================================ */
-footer{
-  padding:32px 24px;border-top:1px solid rgba(241,239,232,.06);
-}
-.footer-inner{
-  max-width:1140px;margin:0 auto;
-  display:flex;justify-content:space-between;align-items:center;
-  flex-wrap:wrap;gap:16px;
-}
-.footer-copy{font-size:.85rem;color:var(--text-dim)}
-.footer-pdca{
-  font-family:var(--mono);font-size:.82rem;color:var(--text-dim);
-}
+/* products */
+.products{display:grid; grid-template-columns:repeat(3,1fr); gap:26px}
+.product{background:var(--surface); box-shadow:inset 0 0 0 1px var(--hair); padding:30px 28px 32px; display:flex; flex-direction:column; gap:14px}
+.product h3{font-size:1.25rem}
+.product p{color:var(--dim); font-size:.95rem; flex:1}
+.product .p-for{font-family:var(--mono); font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; color:var(--gold)}
+@media(max-width:820px){.products{grid-template-columns:1fr}}
 
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-@media(max-width:768px){
-  .metrics-grid{grid-template-columns:repeat(2,1fr)}
-  .services-grid{grid-template-columns:1fr}
-  .approach-steps{grid-template-columns:repeat(2,1fr);gap:32px}
-  .approach-steps::before{display:none}
-  .cases-grid{grid-template-columns:1fr}
-  .hero{padding:100px 24px 60px}
-  .footer-inner{justify-content:center;text-align:center}
+/* how */
+.steps{display:grid; grid-template-columns:repeat(3,1fr); gap:0 44px; counter-reset:step}
+.step{border-top:2px solid var(--gold-line); padding-top:22px}
+.step::before{
+  counter-increment:step; content:counter(step,decimal-leading-zero);
+  font-family:var(--mono); color:var(--gold); font-size:.8rem; letter-spacing:.12em; display:block; margin-bottom:10px;
 }
-@media(max-width:480px){
-  .metrics-grid{grid-template-columns:1fr}
-  .approach-steps{grid-template-columns:1fr}
-  .hero-buttons{flex-direction:column;align-items:center}
+.step h3{font-size:1.2rem; margin-bottom:10px}
+.step p{color:var(--dim); font-size:.95rem}
+@media(max-width:760px){.steps{grid-template-columns:1fr; gap:34px}}
+.principles{margin-top:56px; display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--hair)}
+.principle{background:var(--bg); padding:20px 28px; display:flex; gap:14px; align-items:baseline}
+.principle:nth-child(odd){padding-left:0}
+.principle::before{content:'—'; color:var(--gold); flex:none}
+.principle p{font-size:.97rem}
+@media(max-width:760px){.principles{grid-template-columns:1fr}.principle{padding-left:0;padding-right:0}}
+
+/* about */
+.about{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.9fr); gap:18px 64px}
+.about-name{font-family:var(--display); font-size:1.5rem; line-height:1.25}
+.about-role{color:var(--gold); font-family:var(--mono); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; margin-top:10px}
+.about-body{color:var(--dim); max-width:44em}
+.about-body b{color:var(--ink); font-weight:600}
+.about-body p+p{margin-top:14px}
+@media(max-width:760px){.about{grid-template-columns:1fr}}
+
+/* CTA */
+.cta{margin-top:96px; border-top:1px solid var(--hair-strong); padding:84px 0 90px; text-align:left}
+.cta h2{font-size:clamp(2rem,4.6vw,3.1rem); max-width:14em; margin:20px 0 18px}
+.cta .lead{margin-bottom:38px}
+.cta-row{display:flex; gap:16px; flex-wrap:wrap; align-items:center}
+.cta-alt{font-size:.95rem; color:var(--dim)}
+.cta-alt a{color:var(--gold); text-decoration:underline; text-underline-offset:3px}
+
+footer{border-top:1px solid var(--hair); padding:26px 0 40px}
+footer .wrap{display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  font-family:var(--mono); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--dim)}
+
+/* scroll reveal */
+.reveal{opacity:0; transform:translateY(28px); transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1; transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rise,.reveal{opacity:1 !important; transform:none !important; animation:none !important; transition:none !important}
+  #cashcurve .draw{animation:none; stroke-dashoffset:0}
+  #cashcurve .pop{animation:none; opacity:1}
+  html{scroll-behavior:auto}
 }
 </style>
 </head>
 <body>
 
-<!-- ============================================================
-     HERO
-     ============================================================ -->
-<section class="hero">
-  <div class="hero-glow hero-glow--teal"></div>
-  <div class="hero-glow hero-glow--blue"></div>
-  <div class="hero-content">
-    <div class="hero-logo">
-      <svg width="56" height="56" viewBox="0 0 72 72" aria-label="RECRAFT logo">
-        <g transform="translate(4,4)">
-          <path d="M32 2 A30 30 0 0 1 62 32" fill="none" stroke="#5DCAA5" stroke-width="5" stroke-linecap="round"/>
-          <path d="M62 32 A30 30 0 0 1 32 62" fill="none" stroke="#85B7EB" stroke-width="5" stroke-linecap="round"/>
-          <path d="M32 62 A30 30 0 0 1 2 32" fill="none" stroke="#EF9F27" stroke-width="5" stroke-linecap="round"/>
-          <path d="M2 32 A30 30 0 0 1 20 6" fill="none" stroke="#F0997B" stroke-width="5" stroke-linecap="round"/>
-          <polygon points="16,2 22,8 14,10" fill="#F0997B"/>
-          <text x="32" y="32" font-family="'DM Sans',sans-serif" font-size="26" font-weight="700" fill="#F1EFE8" text-anchor="middle" dominant-baseline="central">R</text>
+<div class="topbar" id="topbar" aria-hidden="true">
+  <div class="wrap">
+    <div class="wordmark">RE<b>CRAFT</b></div>
+    <a class="btn" href="https://t.me/yerzhan_serikbayev" tabindex="-1">Написать в Telegram</a>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="brandbar rise">
+      <div class="wordmark">RE<b>CRAFT</b></div>
+      <div class="brand-city">Астана · Казахстан</div>
+    </div>
+    <p class="eyebrow rise d1">Финансовый контроль · Закупки · Учёт · AI</p>
+    <h1 class="rise d2">Маржа теряется не в отчётах — <em>на площадке</em>. Я делаю так, чтобы вы видели это вовремя.</h1>
+    <p class="lead rise d3">Цифровой порядок для строительных, горнодобывающих, телеком- и транспортных компаний: управленческая отчётность для акционера, пересборка закупок, учётные системы и AI-слой поверх вашей 1С.</p>
+    <div class="hero-cta rise d4">
+      <a class="btn" href="https://t.me/yerzhan_serikbayev">Написать в Telegram</a>
+      <a class="btn ghost" href="#cases">Смотреть практику</a>
+    </div>
+    <div class="curveband" aria-label="Кривая денег проекта: аванс, кассовый разрыв в середине, выход в маржу">
+      <svg id="cashcurve" viewBox="0 0 1000 270" role="img">
+        <line x1="0" y1="140" x2="1000" y2="140" stroke="var(--curve-zero)" stroke-width="1" stroke-dasharray="3 6"/>
+        <path class="draw" d="M0,138 C80,96 140,88 210,108 C300,134 330,196 415,218 C470,232 520,222 585,188 C680,138 790,84 1000,34"
+              fill="none" stroke="var(--curve)" stroke-width="2.5"/>
+        <g class="pop">
+          <circle cx="415" cy="218" r="4.5" fill="var(--terra)"/>
+          <text class="curve-label lbl-long" x="415" y="252" text-anchor="middle" fill="var(--terra)">кассовый разрыв — увидеть за месяц, а не по факту</text>
+          <text class="curve-label lbl-short" x="415" y="258" text-anchor="middle" fill="var(--terra)">кассовый разрыв</text>
+          <circle cx="972" cy="41" r="4.5" fill="var(--curve)"/>
+          <text class="curve-label" x="964" y="22" text-anchor="end" fill="var(--gold)">выход в маржу</text>
+          <text class="curve-label" x="8" y="122" fill="var(--dim)">аванс</text>
         </g>
       </svg>
-      <span class="hero-logo-text">RECRAFT</span>
-    </div>
-    <h1>Бизнес заслуживает<br><span class="gradient">пересборки</span></h1>
-    <p>Операционная трансформация, внедрение CRM/ERP и&nbsp;AI-автоматизация для компаний, которые переросли свои процессы.</p>
-    <div class="hero-buttons">
-      <a href="https://wa.me/77019149520?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BE%D0%B1%D1%81%D1%83%D0%B4%D0%B8%D1%82%D1%8C%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D1%82%D1%80%D0%B0%D0%BD%D1%81%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D0%B8." target="_blank" rel="noopener" class="btn btn-primary">Обсудить проект</a>
-      <a href="#approach" class="btn btn-secondary">Как мы работаем</a>
     </div>
   </div>
-</section>
+</header>
 
-<!-- ============================================================
-     METRICS
-     ============================================================ -->
-<section class="metrics reveal">
-  <div class="container">
-    <div class="metrics-grid">
-      <div class="metric">
-        <div class="metric-value">15+</div>
-        <div class="metric-label">Лет в IT и управлении</div>
-      </div>
-      <div class="metric">
-        <div class="metric-value">50+</div>
-        <div class="metric-label">Трансформационных проектов</div>
-      </div>
-      <div class="metric">
-        <div class="metric-value">B2G</div>
-        <div class="metric-label">Фокус на госсектор</div>
-      </div>
-      <div class="metric">
-        <div class="metric-value">AI</div>
-        <div class="metric-label">Автоматизация на базе LLM</div>
-      </div>
-    </div>
+<div class="facts">
+  <div class="wrap">
+    <div class="fact reveal"><b>20+</b><span>лет в IT и управлении проектами</span></div>
+    <div class="fact reveal"><b>10+</b><span>стран, где вёл внедрения корпоративных ERP</span></div>
+    <div class="fact reveal"><b>6</b><span>отраслей: энергострой, горнодобыча, телеком, транспорт, логистика, медицина</span></div>
+    <div class="fact reveal"><b>1</b><span>ответственный: каждый проект веду лично, без передачи «команде»</span></div>
   </div>
-</section>
+</div>
 
-<!-- ============================================================
-     SERVICES
-     ============================================================ -->
-<section class="services">
-  <div class="container">
-    <div class="section-header reveal">
-      <h2 class="section-title">Четыре фазы трансформации</h2>
-      <p class="section-sub">Каждый проект проходит цикл PDCA — от диагностики до передачи.</p>
+<section id="pains">
+  <div class="wrap">
+    <div class="sect-head reveal">
+      <div>
+        <p class="eyebrow">Знакомо?</p>
+        <h2>Четыре фразы, с которых начинается каждый мой проект</h2>
+      </div>
+      <p class="lead">Это цитаты собственников. Если хотя бы одна — про вашу компанию, нам есть о чём говорить.</p>
     </div>
-    <div class="services-grid">
-      <div class="service-card reveal">
-        <div class="service-tag">Plan — Диагностика</div>
-        <h3>Операционный аудит</h3>
-        <ul>
-          <li>Аудит CRM и задачного менеджмента</li>
-          <li>Оценка эффективности сотрудников</li>
-          <li>Карта процессов и узких мест</li>
-          <li>Стратегия трансформации</li>
-        </ul>
+    <div class="pains">
+      <div class="pain reveal">
+        <blockquote>Деньги были — потом раз, и сгорели. Работа не выполнена, маржа ноль.</blockquote>
+        <p>Классика подрядного бизнеса: аванс уходит на ФОТ и материалы быстрее, чем приходят транши. Ответ — <b>недельная кривая денег</b> и ежемесячный обзор проекта для акционера.</p>
       </div>
-      <div class="service-card reveal">
-        <div class="service-tag">Do — Внедрение</div>
-        <h3>Перестройка операционки</h3>
-        <ul>
-          <li>Внедрение Bitrix24 / 1C</li>
-          <li>Построение воронок продаж B2B/B2G</li>
-          <li>Интеграция AI в бизнес-процессы</li>
-          <li>Автоматизация рутины</li>
-        </ul>
+      <div class="pain reveal">
+        <blockquote>Заявка на любую мелочь согласуется два месяца.</blockquote>
+        <p>Пятнадцать шагов, семь согласующих, возвраты по кругу — а рядом живёт «быстрый» контур в обход. Ответ — <b>пересборка процесса закупки</b>: лимиты по суммам, контрольные точки, автоматизация рутины.</p>
       </div>
-      <div class="service-card reveal">
-        <div class="service-tag">Check — Контроль</div>
-        <h3>Метрики и дашборды</h3>
-        <ul>
-          <li>KPI и OKR для каждой роли</li>
-          <li>Дашборды продаж и операций</li>
-          <li>Аналитика задач и дедлайнов</li>
-          <li>Еженедельный пульс компании</li>
-        </ul>
+      <div class="pain reveal">
+        <blockquote>Сводки с участков приходят каждый день. Им никто не верит.</blockquote>
+        <p>Управленческая правда держится на ручных таблицах одного человека. Ответ — <b>данные вместо слов</b>: телеметрия, учётные системы и дашборды, которые сверяют заявленное с фактическим.</p>
       </div>
-      <div class="service-card reveal">
-        <div class="service-tag">Act — Масштабирование</div>
-        <h3>Передача и рост</h3>
-        <ul>
-          <li>Обучение команды</li>
-          <li>Документирование процессов</li>
-          <li>Коррекция по результатам</li>
-          <li>Поддержка на переходном этапе</li>
-        </ul>
+      <div class="pain reveal">
+        <blockquote>Кто нам сколько должен — в примечаниях к Excel.</blockquote>
+        <p>Долги контрагентов, водителей, субподрядчиков восстанавливаются вручную раз в месяц. Ответ — <b>учётное ядро</b>: начисления и оплаты сводятся автоматически, долг виден в любой момент.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     APPROACH
-     ============================================================ -->
-<section class="approach" id="approach">
-  <div class="container">
-    <div class="section-header reveal">
-      <h2 class="section-title">Как выглядит проект</h2>
-      <p class="section-sub">От первого звонка до передачи — прозрачный процесс с чёткими сроками.</p>
+<section id="cases">
+  <div class="wrap">
+    <div class="sect-head reveal">
+      <div>
+        <p class="eyebrow">Из практики</p>
+        <h2>Живые проекты, не презентации</h2>
+      </div>
+      <p class="lead">Имена клиентов не называю — конфиденциальность входит в услугу. Отрасль, масштаб и суть работы — без изменений.</p>
     </div>
-    <div class="approach-steps reveal">
-      <div class="step">
-        <div class="step-dot"></div>
-        <div class="step-num">01</div>
-        <h3>Погружение</h3>
-        <div class="step-time">1–2 недели</div>
-        <p>Аудит, интервью, данные</p>
+
+    <article class="case reveal">
+      <div class="case-meta">
+        <span class="case-industry">Энергостроительство</span>
+        <span class="case-scale">Подрядчик на строительстве магистральной ЛЭП. Сотни опор, десятки поставщиков, миллиардные обороты.</span>
       </div>
-      <div class="step">
-        <div class="step-dot"></div>
-        <div class="step-num">02</div>
-        <h3>Архитектура</h3>
-        <div class="step-time">1 неделя</div>
-        <p>Целевая модель, дорожная карта</p>
+      <div>
+        <h3>Акционер видел деньги проекта раз в квартал — и каждый раз поздно</h3>
+        <p class="case-body">Поставил <b>ежемесячный управленческий обзор проекта</b> по методологии международного концерна: прогноз бюджета до завершения, маржа план/факт, риски. Добавил <b>недельную кривую денег</b> — кассовый разрыв стал виден за месяцы до пика. Сейчас строю <b>производственный дашборд</b>: монтаж каждой опоры, темп против графика, актирование — на карте и в динамике по дням.</p>
+        <div class="case-tags"><span class="tag live">на сопровождении</span><span class="tag">финконтроль</span><span class="tag">Bitrix24</span><span class="tag">дашборды</span></div>
       </div>
-      <div class="step">
-        <div class="step-dot"></div>
-        <div class="step-num">03</div>
-        <h3>Внедрение</h3>
-        <div class="step-time">4–8 недель</div>
-        <p>Настройка систем, обучение</p>
+    </article>
+
+    <article class="case reveal">
+      <div class="case-meta">
+        <span class="case-industry">Горнодобыча · Логистика</span>
+        <span class="case-scale">Группа из двух компаний: 1000+ единиц техники, 20 территориальных управлений, тысячи сотрудников.</span>
       </div>
-      <div class="step">
-        <div class="step-dot"></div>
-        <div class="step-num">04</div>
-        <h3>Передача</h3>
-        <div class="step-time">2–4 недели</div>
-        <p>Документация, сопровождение</p>
+      <div>
+        <h3>Закупка шла 60 дней. Техника «в работе» — только на бумаге</h3>
+        <p class="case-body">Веду <b>программу цифровой трансформации</b> как руководитель проектного офиса: диагностика показала десятки контрольных разрывов — от платежей в обход заявок до топлива без владельца. Перестраиваем закупки с цикла ~60 дней к цели 5–7, диспетчеризацию переводим со слов на <b>телеметрию</b>. Принцип: не менять учётную систему ради моды — ядро остаётся в 1С, поверх встаёт тонкий AI-слой.</p>
+        <div class="case-tags"><span class="tag live">программа на 12 мес</span><span class="tag">закупки</span><span class="tag">1С + AI</span><span class="tag">проектный офис</span></div>
+      </div>
+    </article>
+
+    <article class="case reveal">
+      <div class="case-meta">
+        <span class="case-industry">Телеком-инфраструктура</span>
+        <span class="case-scale">Подрядчик по строительству сетей для крупных операторов. Тендеры, субподряд, сотни номенклатур ТМЦ.</span>
+      </div>
+      <div>
+        <h3>От тендера до оплаты — в одной системе вместо пяти таблиц</h3>
+        <p class="case-body">Построил <b>сквозную экосистему</b>: воронка тендеров с расчётом маржинальности → карточка проекта с бюджетом → контроль исходящих платежей с лимитами → входящие оплаты и гарантийные удержания. Сейчас внедряю модуль <b>склада и ТМЦ</b>: выдача только под производственный заказ, директор видит стоимость каждого объекта.</p>
+        <div class="case-tags"><span class="tag live">этап 2</span><span class="tag">Bitrix24</span><span class="tag">финконтроль</span><span class="tag">склад</span></div>
+      </div>
+    </article>
+
+    <article class="case reveal">
+      <div class="case-meta">
+        <span class="case-industry">Горнодобыча · HR</span>
+        <span class="case-scale">Китайско-казахстанская группа. Персонал на месторождениях, рост с 20 до 300 человек.</span>
+      </div>
+      <div>
+        <h3>Кадровые документы подписывались неделями — люди на вахте, кадровик в городе</h3>
+        <p class="case-body">Разработал <b>лёгкое собственное решение</b>: работник получает ссылку в Telegram и подписывает трудовой договор или приказ <b>ЭЦП через eGov Mobile</b> прямо с телефона — двуязычно, юридически значимо, без входа в какие-либо системы. Дешевле «больших платформ» в разы, потому что клиент не платит за функционал, который ему не нужен.</p>
+        <div class="case-tags"><span class="tag live">внедрение</span><span class="tag">своё решение</span><span class="tag">ЭЦП / eGov</span><span class="tag">Telegram</span></div>
+      </div>
+    </article>
+
+    <article class="case reveal">
+      <div class="case-meta">
+        <span class="case-industry">Транспорт · Таксопарк</span>
+        <span class="case-scale">Парк ~100 водителей под Яндекс.Такси. Оплаты из трёх источников: наличные, Kaspi, баланс Яндекса.</span>
+      </div>
+      <div>
+        <h3>Долг водителя считали вручную — в примечаниях платёжной ведомости</h3>
+        <p class="case-body">Проектирую <b>учётное ядро</b>: аренда начисляется автоматически по договору, оплаты из Kaspi и кабинета Яндекса подтягиваются по API и разносятся по водителям. Долг каждого водителя — в любой момент, у директора — дашборд, у водителя — свой кабинет в Telegram. Следующий шаг — AI-ассистент, который сам делает постконтроль и предсказывает должников.</p>
+        <div class="case-tags"><span class="tag">в работе</span><span class="tag">Supabase</span><span class="tag">Kaspi / Яндекс API</span><span class="tag">AI-слой</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="products">
+  <div class="wrap">
+    <div class="sect-head reveal">
+      <div>
+        <p class="eyebrow">Готовые решения</p>
+        <h2>Решения, которые уже написаны и работают</h2>
+      </div>
+      <p class="lead">Выросли из живых проектов: вы не платите за разработку с нуля и за чужие лицензии. Внедрение — за недели, а не месяцы.</p>
+    </div>
+    <div class="products">
+      <div class="product reveal">
+        <span class="p-for">для компаний с вахтовым и полевым персоналом</span>
+        <h3>Дистанционное подписание кадровых документов</h3>
+        <p>Договоры, приказы, ознакомления с ТБ — работник подписывает ЭЦП через eGov Mobile по ссылке в Telegram. Юридически значимо, двуязычно, готово к проверкам.</p>
+      </div>
+      <div class="product reveal">
+        <span class="p-for">для таксопарков под Яндекс.Такси</span>
+        <h3>Учёт долгов водителей</h3>
+        <p>Наличные, Kaspi и списания с баланса Яндекса сводятся автоматически. Долг по каждому водителю и договору — онлайн, вместо ведомостей и ручного сведения.</p>
+      </div>
+      <div class="product reveal">
+        <span class="p-for">для собственника, который хочет «спросить у данных»</span>
+        <h3>AI-слой поверх вашей 1С</h3>
+        <p>Подключаю ChatGPT или Claude к данным вашей компании — безопасно, только чтение. Вы спрашиваете «кто мне должен и сколько?» — и получаете ответ из учёта, а не со слов.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     CASES
-     ============================================================ -->
-<section class="cases">
-  <div class="container">
-    <div class="section-header reveal">
-      <h2 class="section-title">Результаты, а не презентации</h2>
-      <p class="section-sub">Реальные проекты с измеримыми результатами.</p>
+<section id="how">
+  <div class="wrap">
+    <div class="sect-head reveal">
+      <div>
+        <p class="eyebrow">Как я работаю</p>
+        <h2>Три этапа. Платите за результат, а не за обещания</h2>
+      </div>
+      <p class="lead">Никаких «внедрений под ключ за год вперёд». Каждый шаг заканчивается работающим результатом — и вашим решением, идти ли дальше.</p>
     </div>
-    <div class="cases-grid">
-      <div class="case-card reveal">
-        <div class="case-tag">Телеком / спутниковая связь</div>
-        <h3>Операционная трансформация VSAT-оператора</h3>
-        <p>Аудит 337 задач, перестройка CRM, запуск B2G-воронки на&nbsp;5&nbsp;млрд&nbsp;тг.</p>
-        <div class="case-metrics">
-          <span class="case-metric">просрочка 81% → 30%</span>
-          <span class="case-metric">пайплайн 5 млрд</span>
-        </div>
+    <div class="steps">
+      <div class="step reveal">
+        <h3>Диагностика</h3>
+        <p>Интервью с командой, разбор выгрузок из 1С и Excel. На выходе — карта разрывов с ценой каждого в тенге и дорожная карта. Фиксированные срок и стоимость: 2–8 недель.</p>
       </div>
-      <div class="case-card reveal">
-        <div class="case-tag">Автоматизация продаж</div>
-        <h3>AI-интеграция в CRM и тендерную аналитику</h3>
-        <p>Text-to-SQL для 1C, AI-скоринг клиентов, автоматическая приоритизация сделок.</p>
-        <div class="case-metrics">
-          <span class="case-metric">скорость анализа 10x</span>
-          <span class="case-metric">105 тендеров в воронке</span>
-        </div>
+      <div class="step reveal">
+        <h3>Внедрение спринтами</h3>
+        <p>Дорожная карта режется на спринты по 2–4 недели. Каждый спринт — работающая функция в руках вашей команды. После каждого решаете, продолжать ли.</p>
       </div>
-      <div class="case-card reveal">
-        <div class="case-tag">Голосовые AI-боты</div>
-        <h3>Исходящие звонки с AI для ретрит-центра</h3>
-        <p>CRM-триггер → Make.com → ElevenLabs → webhook. Полный автоматический цикл.</p>
-        <div class="case-metrics">
-          <span class="case-metric">полный автоцикл</span>
-          <span class="case-metric">обратная связь в CRM</span>
-        </div>
+      <div class="step reveal">
+        <h3>Сопровождение</h3>
+        <p>Система живёт и развивается: поддержка, доработки, регулярная управленческая отчётность. Фиксированная сумма в месяц, расторжение — за 30 дней без объяснений.</p>
       </div>
-      <div class="case-card reveal">
-        <div class="case-tag">ERP / 1С</div>
-        <h3>Архитектура интеграции LLM с 1С:ERP</h3>
-        <p>4 подхода: REST API, RAG, Text-to-SQL, flat export. Гибридная архитектура.</p>
-        <div class="case-metrics">
-          <span class="case-metric">4 архитектуры</span>
-          <span class="case-metric">SQL RAG гибрид</span>
-        </div>
+    </div>
+    <div class="principles">
+      <div class="principle reveal"><p>Цифры беру из учёта, а не со слов — диагностика начинается с выгрузок, не с презентаций.</p></div>
+      <div class="principle reveal"><p>Не продаю платформы. Bitrix24, 1С или своё решение — выбираю то, что дешевле и надёжнее для вашей задачи, и говорю прямо, если «большая система» вам не нужна.</p></div>
+      <div class="principle reveal"><p>Еженедельный отчёт одной страницей — вы всегда знаете, что сделано, что дальше и где риски.</p></div>
+      <div class="principle reveal"><p>AI использую везде, где он быстрее и дешевле человека, — поэтому мои сроки и цены ниже, чем у классических интеграторов.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sect-head reveal">
+      <div>
+        <p class="eyebrow">Кто делает</p>
+        <h2>Один человек, а не «отдел продаж»</h2>
+      </div>
+    </div>
+    <div class="about reveal">
+      <div>
+        <div class="about-name">Ержан Серикбаев</div>
+        <div class="about-role">основатель RECRAFT</div>
+      </div>
+      <div class="about-body">
+        <p>Больше 20 лет в IT и управлении проектами: вёл внедрения корпоративных ERP в международном машиностроительном концерне в десятке стран — от Казахстана до Египта, Турции и ЮАР. Работал в проектах Samruk-Kazyna, Huawei, Kazpost. Master of IT, University of Adelaide.</p>
+        <p>RECRAFT — это перенос <b>методологий большого корпоративного мира</b> — финконтроль проектов, управление изменениями, гейты качества — в масштаб и бюджет среднего казахстанского бизнеса. То, что концерну стоит миллионы евро, среднему бизнесу сегодня доступно за счёт AI-разработки — если есть тот, кто умеет и то, и другое.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     TECH STACK
-     ============================================================ -->
-<section class="stack">
-  <div class="container">
-    <div class="section-header reveal">
-      <h2 class="section-title">Стек технологий</h2>
-    </div>
-    <div class="stack-pills reveal">
-      <span class="pill">Bitrix24</span>
-      <span class="pill">1С:ERP</span>
-      <span class="pill">Claude API</span>
-      <span class="pill">GPT-4</span>
-      <span class="pill">Gemini</span>
-      <span class="pill">Python</span>
-      <span class="pill">n8n</span>
-      <span class="pill">Make.com</span>
-      <span class="pill">ElevenLabs</span>
-      <span class="pill">MCP Protocol</span>
-      <span class="pill">Text-to-SQL</span>
-      <span class="pill">RAG</span>
-      <span class="pill">Telegram Bots</span>
-      <span class="pill">REST API</span>
-      <span class="pill">Docker</span>
-      <span class="pill">Coolify</span>
+<div class="cta" id="contact">
+  <div class="wrap">
+    <p class="eyebrow reveal">Первый шаг</p>
+    <h2 class="reveal">Расскажите, где у вас теряются деньги</h2>
+    <p class="lead reveal">Полчаса разговора — и я скажу честно: есть ли здесь задача для меня, сколько стоит её решить и с чего начать. Если задачи нет — тоже скажу.</p>
+    <div class="cta-row reveal">
+      <a class="btn" href="https://t.me/yerzhan_serikbayev">Telegram — @yerzhan_serikbayev</a>
+      <span class="cta-alt">или почтой: <a href="mailto:yserikbayev@gmail.com">yserikbayev@gmail.com</a></span>
     </div>
   </div>
-</section>
+</div>
 
-<!-- ============================================================
-     CTA
-     ============================================================ -->
-<section class="cta">
-  <div class="cta-glow"></div>
-  <div class="cta-content">
-    <h2 class="section-title reveal">Готовы к пересборке?</h2>
-    <p class="reveal">Первая встреча — бесплатная диагностика на 30 минут.</p>
-    <a href="https://wa.me/77019149520?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BE%D0%B1%D1%81%D1%83%D0%B4%D0%B8%D1%82%D1%8C%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%20%D1%82%D1%80%D0%B0%D0%BD%D1%81%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D0%B8." target="_blank" rel="noopener" class="btn btn-primary reveal">Обсудить проект</a>
-    <div class="contacts reveal">
-      <span><a href="https://t.me/yerzhan_serikbayev" target="_blank" rel="noopener">Telegram @yerzhan_serikbayev</a></span>
-      <span><a href="https://wa.me/77019149520" target="_blank" rel="noopener">WhatsApp</a></span>
-      <span><a href="https://www.linkedin.com/in/yerzhan-serikbayev/" target="_blank" rel="noopener">LinkedIn</a></span>
-      <span><a href="mailto:yerzhan@telservice.kz">yerzhan@telservice.kz</a></span>
-      <span>Алматы, Казахстан</span>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     FOOTER
-     ============================================================ -->
 <footer>
-  <div class="footer-inner">
-    <div class="footer-copy">&copy; 2026 RECRAFT. Бизнес заслуживает пересборки.</div>
-    <div class="footer-pdca">Plan → Do → Check → Act → ∞</div>
+  <div class="wrap">
+    <span>© 2026 RECRAFT · ИП «Серикбаев Е.О.»</span>
+    <span>Астана · работаю по всему Казахстану</span>
   </div>
 </footer>
 
-<!-- ============================================================
-     JS — Scroll Reveal
-     ============================================================ -->
 <script>
-document.addEventListener('DOMContentLoaded',()=>{
-  const obs=new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})
-  },{threshold:0.15});
-  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-});
+(function(){
+  var bar = document.getElementById('topbar');
+  var hero = document.querySelector('header.hero');
+  function toggleBar(){
+    var past = window.scrollY > (hero ? hero.offsetHeight * 0.9 : 700);
+    bar.classList.toggle('on', past);
+    bar.setAttribute('aria-hidden', past ? 'false' : 'true');
+    bar.querySelector('a').tabIndex = past ? 0 : -1;
+  }
+  window.addEventListener('scroll', toggleBar, {passive:true});
+  toggleBar();
+
+  var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var els = document.querySelectorAll('.reveal');
+  if (mq.matches || !('IntersectionObserver' in window)) {
+    els.forEach(function(el){ el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:.12, rootMargin:'0px 0px -40px 0px'});
+  els.forEach(function(el){ io.observe(el); });
+})();
 </script>
 </body>
 </html>
