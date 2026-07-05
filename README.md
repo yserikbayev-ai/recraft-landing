@@ -24,5 +24,5 @@
 ## Контакты
 
 - Telegram: [@yerzhan_serikbayev](https://t.me/yerzhan_serikbayev)
-- Email: yerzhan@telservice.kz
+- Email: yserikbayev@gmail.com
 - LinkedIn: [yerzhan-serikbayev](https://www.linkedin.com/in/yerzhan-serikbayev/)
