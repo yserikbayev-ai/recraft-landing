@@ -1313,4 +1313,3 @@ mask-composite:intersect}
 
 .status[data-state="Прототип"]::before,.status[data-state="Концепция"]::before,.status[data-state="Проектирование"]::before,.status[data-state="Обследование"]::before{background:#9c8364}
 .status[data-state="Внедрение"]::before,.status[data-state="Разработка"]::before{background:var(--orange)}
-
