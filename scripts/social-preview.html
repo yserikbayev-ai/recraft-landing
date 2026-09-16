@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<title>REFACTOR — обложка ссылки</title>
+<style>
+@font-face{font-family:Onest;src:url('../assets/onest-regular.ttf');font-weight:400}
+@font-face{font-family:Onest;src:url('../assets/onest-bold.ttf');font-weight:700}
+*{box-sizing:border-box}body{margin:0;width:1200px;height:630px;overflow:hidden;background:#f4f3ee;color:#242622;font-family:Onest,sans-serif}
+.top{position:absolute;top:45px;left:55px;right:55px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-size:36px;font-weight:700;letter-spacing:-1.8px;display:flex;align-items:center;gap:14px}.dot{color:#e75a26}.mark{display:grid;grid-template-columns:12px 12px;gap:4px;transform:rotate(-8deg)}.mark i{width:12px;height:12px;background:#e75a26}.mark i:nth-child(2){background:#242622}.location{font-size:14px;letter-spacing:2px;color:#74766f}
+.art{position:absolute;left:655px;top:130px;width:580px;height:400px;object-fit:cover;mix-blend-mode:multiply}
+.copy{position:absolute;left:55px;top:165px;z-index:1}h1{font-size:73px;line-height:1.06;letter-spacing:-4px;font-weight:700;margin:0}h1 span{color:#e75a26}p{font-size:23px;line-height:1.4;color:#676a62;margin:27px 0 0;letter-spacing:-.4px}
+.bottom{position:absolute;bottom:40px;left:55px;right:55px;border-top:1px solid #d0d2c8;padding-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:15px;letter-spacing:.4px}.topics{display:flex;gap:22px}.topics b{font-weight:400}.topics b:before{content:'✳';color:#e75a26;margin-right:9px}.url{font-weight:700;font-size:19px}
+</style>
+<div class="top"><div class="brand"><span class="mark"><i></i><i></i><i></i><i></i></span><span>refactor<span class="dot">.</span></span></div><div class="location">АСТАНА · КАЗАХСТАН</div></div>
+<img class="art" src="../assets/system-sculpture.webp" alt="">
+<div class="copy"><h1>Сложный бизнес.<br><span>Ясная система.</span></h1><p>Процессы, данные и AI —<br>в одной работающей системе.</p></div>
+<div class="bottom"><div class="topics"><b>Финансы</b><b>Операции</b><b>AI</b></div><span class="url">refactor.kz ↗</span></div>
+</html>
