@@ -1,5 +1,5 @@
 async (page) => {
-  const base = page.url().split('/v2/')[0] + '/v2/';
+  const base = await page.evaluate(() => location.origin + '/');
   const results = [];
   const assert = (condition, message) => { if (!condition) throw new Error(message); results.push(message); };
   const errors = [];
@@ -25,7 +25,7 @@ async (page) => {
   assert(await page.evaluate(() => location.pathname) === href, 'Featured case opens a real detail URL');
   assert(await page.locator('.case-story').count() === 3, 'Case includes problem, solution and result');
   await page.locator('.case-breadcrumb').click();
-  assert(await page.evaluate(() => location.pathname) === '/v2/', 'Case returns to portfolio catalogue');
+  assert(await page.evaluate(() => location.pathname) === '/', 'Case returns to portfolio catalogue');
   await page.locator('#brief').scrollIntoViewIfNeeded();
   await page.locator('#brief-next').click();
   assert((await page.locator('#step-label').innerText()).includes('01'), 'Brief cannot continue without a selection');
