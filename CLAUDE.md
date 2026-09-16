@@ -17,12 +17,12 @@
 
 ## Ключевые факты
 
-- Главная и 35 страниц кейсов. `og.png` — сохранённое превью. Генератор: `python3 scripts/build-site.py`.
+- Главная и 35 страниц кейсов. `assets/refactor-social-20260916.png` — актуальная обложка; `og.png` — совместимая копия. Генератор: `python3 scripts/build-site.py`.
 - **Опубликован:** https://refactor.kz (Caddy на финском сервере; repo yserikbayev-ai/recraft-landing; GitHub Pages main/root сохраняется как копия).
 - Позиционирование: «Сложный бизнес. Ясная система» — финансовый контроль, операционные процессы и AI.
 - Структура: hero → направления → 6 визуальных кейсов → каталог 35 проектов → AI-практика → подход → основатель → FAQ → бриф и контакты.
 - Контакты: Telegram @yerzhan_serikbayev, email yserikbayev@gmail.com, LinkedIn /in/yerzhan-serikbayev, Instagram @yerzhanserikbayev (в футере).
-- SEO/шеринг: canonical, og:image + twitter:card на `og.png`, JSON-LD ProfessionalService.
+- SEO/шеринг: canonical, og:image + twitter:card на `assets/refactor-social-20260916.png`, JSON-LD ProfessionalService.
 - НЕЛЬЗЯ: имена клиентов, суммы контрактов, маржа (NDA); упоминание Alstom как работодателя. Цены на сайте не публикуем — только структура оплаты («фиксированная цена этапа», «постоплата по акту»).
 - Это git-репозиторий (есть `.git/`). Коммитить/пушить — только по явной просьбе пользователя.
 - Секретов в проекте нет.
