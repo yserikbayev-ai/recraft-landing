@@ -13,7 +13,7 @@ const { copyFileSync } = require('node:fs');
       await document.fonts.ready;
       await Promise.all([...document.images].map(image => image.decode()));
     });
-    const output = resolve(__dirname, '../assets/refactor-social-20260916.png');
+    const output = resolve(__dirname, '../assets/refactor-social-20261101.png');
     await page.screenshot({ path: output });
     // Keep the legacy image endpoint consistent for previously cached page metadata.
     copyFileSync(output, resolve(__dirname, '../og.png'));

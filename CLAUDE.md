@@ -12,17 +12,17 @@
 
 - Чистый HTML / CSS / JS, без фреймворков и сборщиков.
 - `index.html`, `styles.css`, `app.js`; данные `projects.json`, статические страницы `projects/`, локальные ресурсы `assets/`.
-- Дизайн: светлый фон, графит и оранжевый акцент, локальный Onest, оригинальная объёмная иллюстрация, мобильная адаптивность и reduced-motion.
+- Дизайн: холодный серый «бетон», графит и один красный акцент, локальный Onest, оригинальная объёмная иллюстрация, мобильная адаптивность и reduced-motion.
 - Деплой домена: Caddy на `claude-server`, каталог `/opt/recraft-landing` → `/srv`. GitHub Pages (`main` / root) — копия; push не обновляет действующий домен.
 
 ## Ключевые факты
 
-- Главная и 35 страниц кейсов. `assets/refactor-social-20260916.png` — актуальная обложка; `og.png` — совместимая копия. Генератор: `python3 scripts/build-site.py`.
+- Главная и 35 страниц кейсов. `assets/refactor-social-20261101.png` — актуальная обложка; `og.png` — совместимая копия. Генератор: `python3 scripts/build-site.py`.
 - **Опубликован:** https://refactor.kz (Caddy на финском сервере; repo yserikbayev-ai/recraft-landing; GitHub Pages main/root сохраняется как копия).
 - Позиционирование: «Сложный бизнес. Ясная система» — финансовый контроль, операционные процессы и AI.
 - Структура: hero → направления → 6 визуальных кейсов → каталог 35 проектов → AI-практика → подход → основатель → FAQ → бриф и контакты.
 - Контакты: Telegram @yerzhan_serikbayev, email yserikbayev@gmail.com, LinkedIn /in/yerzhan-serikbayev, Instagram @yerzhanserikbayev (в футере).
-- SEO/шеринг: canonical, og:image + twitter:card на `assets/refactor-social-20260916.png`, JSON-LD ProfessionalService.
+- SEO/шеринг: canonical, og:image + twitter:card на `assets/refactor-social-20261101.png`, JSON-LD ProfessionalService.
 - НЕЛЬЗЯ: имена клиентов, суммы контрактов, маржа (NDA); упоминание Alstom как работодателя. Цены на сайте не публикуем — только структура оплаты («фиксированная цена этапа», «постоплата по акту»).
 - Это git-репозиторий (есть `.git/`). Коммитить/пушить — только по явной просьбе пользователя.
 - Секретов в проекте нет.
